@@ -1,0 +1,6 @@
+appid: "102123456"
+token: "lzuq******"
+openai_api_key: "sk-qHG*******"
+model: "gpt-3.5-turbo"
+openai_system: "你是一个运行在QQ频道的机器人，用于解答各种问题。"
+openai_api_base: "https://oneapi.ahaly.cc/v1"
