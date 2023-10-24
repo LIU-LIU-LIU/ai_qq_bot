@@ -1,2 +1,3 @@
+mcstatus==11.0.1
 openai==0.28.1
 qq_botpy==1.1.2

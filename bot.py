@@ -2,6 +2,8 @@ import openai
 import botpy
 import logging
 import asyncio
+import importlib
+import os
 
 from botpy.message import Message
 from botpy import BotAPI
@@ -23,6 +25,7 @@ logging.basicConfig(
 
 _log = logging.getLogger(__name__)
 
+
 # 创建一个字典来存储已注册的命令和对应的处理函数
 commands = {}
 
@@ -35,21 +38,18 @@ def register_command(command_name):
         return command_handler
     return decorator
 
-@register_command("ping")
-async def ping(api: BotAPI, message: Message, params=None):
-    params="pong"
-    _log.info(f"回复消息: {params}")
-    # 第一种用reply发送消息
-    await message.reply(content=params)
-    return True
-    
-@register_command("status")
-async def status(api: BotAPI, message: Message, params=None):
-    params="status"
-    _log.info(f"回复消息: {params}")
-    # 第一种用reply发送消息
-    await message.reply(content=params)
-    return True
+# 定义插件目录
+PLUGIN_DIR = 'plugins'
+
+# 动态加载插件
+plugin_folder = os.path.join(os.path.dirname(__file__), 'plugins')
+for plugin_name in os.listdir(plugin_folder):
+    plugin_path = os.path.join(plugin_folder, plugin_name)
+    if os.path.isdir(plugin_path):
+        plugin_module = __import__(f'plugins.{plugin_name}.{plugin_name}', fromlist=[''])
+        if hasattr(plugin_module, 'register_commands'):
+            register_commands = getattr(plugin_module, 'register_commands')
+            register_commands(register_command)
 
 class MyClient(botpy.Client):
     # 初始化类变量，用于存储用户对话历史

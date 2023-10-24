@@ -7,6 +7,7 @@ from bot import MyClient
 
 test_config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
 
+
 if __name__ == "__main__":
     openai.api_base =test_config["openai_api_base"]
     openai.api_key =test_config["openai_api_key"]
