@@ -1,6 +1,13 @@
-appid: "102123456"
-token: "lzuq******"
-openai_api_key: "sk-qHG*******"
-model: "gpt-3.5-turbo"
-openai_system: "你是一个运行在QQ频道的机器人，用于解答各种问题。"
+#前往qq开放平台获取，https://q.qq.com/
+appid: "10******"
+token: "lzuq9La1Rq**********"
+#监听事件：true只处理at机器人的消息；false处理频道内的全部消息，而不只是 at 机器人的消息。(仅私域机器人能够设置false)
+at_intents: true
+#模型选择，如果你使用的是one_api也可以在这里选择SparkDesk等非openai模型
+openai_model: "gpt-3.5-turbo"
+openai_api_key: "sk-qHGLzKMH********"
 openai_api_base: "https://oneapi.ahaly.cc/v1"
+#会话首次告诉机器人的提示词。
+openai_system_prompt: "你是一个运行在QQ频道的机器人，用于解答各种问题。"
+#机器人保存的上下文数量
+history: 10
